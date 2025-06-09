@@ -1,37 +1,28 @@
-#include <DS1302.h>
+#include <Arduino.h>
+#include <DS1302.h>  // Biblioteca que define a struct Time diretamente
 
-// Pinos: RST (CE), DAT (I/O), CLK
-DS1302 rtc(27, 26, 25);
+#define DS1302_CLK  25
+#define DS1302_DAT  26
+#define DS1302_RST  27
+
+DS1302 rtc(DS1302_RST, DS1302_DAT, DS1302_CLK);
 
 void setup() {
   Serial.begin(115200);
 
-  rtc.halt(false);
-  rtc.writeProtect(false);
+  // ✅ Define a hora (ano, mês, dia, hora, minuto, segundo, dia da semana)
+  Time t(2024, 6, 9, 14, 45, 0, Time::Day::kMonday);
 
-  // ✅ Ajuste de data/hora (use apenas uma vez)
-  Time t;
-  t.sec = 0;
-  t.min = 17;
-  t.hr  = 14;
-  t.date = 25;
-  t.mon  = 5;
-  t.yr   = 2025;
-
-  rtc.time(t);  // ✅ Ajusta o RTC com a hora definida
-
-  Serial.println("Hora ajustada com sucesso!");
+  rtc.time(t);
+  Serial.println("⏱ RTC ajustado!");
 }
 
 void loop() {
-  Time now = rtc.time();  // ✅ Lê a hora atual
+  Time now = rtc.time();
 
-  Serial.print(now.date); Serial.print('/');
-  Serial.print(now.mon); Serial.print('/');
-  Serial.print(now.yr); Serial.print(" ");
-  Serial.print(now.hr); Serial.print(':');
-  Serial.print(now.min); Serial.print(':');
-  Serial.println(now.sec);
+  Serial.printf("🕒 %04d-%02d-%02d %02d:%02d:%02d\n",
+                now.yr, now.mon, now.date,
+                now.hr, now.min, now.sec);
 
   delay(1000);
 }
