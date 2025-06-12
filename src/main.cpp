@@ -7,11 +7,14 @@
 
 DS1302 rtc(DS1302_RST, DS1302_DAT, DS1302_CLK);
 
+// ⚠️ Mude para `true` apenas quando quiser reconfigurar o RTC
+const bool ajustarHora = false;
+
 void setup() {
   Serial.begin(115200);
 
   // ✅ Define a hora (ano, mês, dia, hora, minuto, segundo, dia da semana)
-  Time t(2024, 6, 9, 14, 45, 0, Time::Day::kMonday);
+  Time t(2025, 6, 11, 21, 34, 0, Time::Day::kMonday);
 
   rtc.time(t);
   Serial.println("⏱ RTC ajustado!");
