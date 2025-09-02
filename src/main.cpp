@@ -2,9 +2,9 @@
 #include <DS1302.h>  // Biblioteca compatível com struct Time
 
 // 🧩 Definições dos pinos conectados ao módulo RTC
-#define DS1302_CLK  25
-#define DS1302_DAT  26
-#define DS1302_RST  27
+#define DS1302_CLK  15
+#define DS1302_DAT  16
+#define DS1302_RST  17
 
 // 🕒 Instância do RTC
 DS1302 rtc(DS1302_RST, DS1302_DAT, DS1302_CLK);
