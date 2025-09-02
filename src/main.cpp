@@ -21,7 +21,7 @@ void setup() {
     Serial.println("🔧 Ajustando hora manualmente...");
 
     // (ano, mês, dia, hora, minuto, segundo, dia da semana)
-    Time t(20245, 6, 11, 21, 52, 0, Time::Day::kSunday);
+    Time t(2025, 9, 1, 22, 22, 0, Time::Day::kSunday);
 
     rtc.writeProtect(false);  // Desbloqueia escrita
     rtc.halt(false);          // Garante que o RTC conte
